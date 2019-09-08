@@ -15,5 +15,9 @@
   "bugs": {
     "url": "https://github.com/TomoKulusic/Similaritipsum/issues"
   },
-  "homepage": "https://github.com/TomoKulusic/Similaritipsum#readme"
+  "homepage": "https://github.com/TomoKulusic/Similaritipsum#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "leven": "^3.1.0"
+  }
 }
