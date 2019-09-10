@@ -1,18 +1,28 @@
 var express = require('express');
-const route = require('./api/controllers/wordsController')
 const BusinessLayer = require('./services/businessLayer.js')
 var app = express();
 var bl = new BusinessLayer();
+var request = require("request");
 
-// app.use('/words', route);
- 
-var testStringOne = "Testword";
-var testStringTwo = "Testwordaaaaaaaaaaaaaaaaa";
+let url = 'https://baconipsum.com/api/?type=all-meat&sentences=1&start-with-lorem=1'
 
-// console.log(array);
+function main() {
+  let parsedData = [];
+  let data = bl.getData(url, request);
+  data.then(function (result) {
+    data = result;
+    for(var i = 0; i < data.length; i++) {
+      parsedData += data[i].split(" ")
+    }
+    parsedData = parsedData.split(",");
+    console.log("Avg similarity is: " + bl.wordsArraySimilarity(parsedData));
+  }, function (err) {
+    console.log(err);
+  })
+}
+// main();
 
-var wordOne = bl.characterSwitch(testStringOne);
-var wordTwo = bl.characterSwitch(testStringTwo)
-console.log(bl.wordDifference(wordOne,wordTwo));
+var test1 = 'a aaa " " a'
+console.log(bl.characterSwitch(test1));
 
 module.exports = app;
